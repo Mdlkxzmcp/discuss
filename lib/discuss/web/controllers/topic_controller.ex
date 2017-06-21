@@ -9,7 +9,7 @@ defmodule Discuss.Web.TopicController do
   end
 
   def new(conn, _params) do
-    changeset = Topics.change_topic(%Discuss.Topics.Topic{})
+    changeset = Topics.change_topic(%Topics.Topic{})
     render(conn, "new.html", changeset: changeset)
   end
 
