@@ -17,9 +17,7 @@ defmodule Discuss.Topics do
       [%Topic{}, ...]
 
   """
-  def list_topics do
-    Repo.all(Topic)
-  end
+  def list_topics, do: Repo.all(Topic)
 
   @doc """
   Gets a single topic.
@@ -76,17 +74,19 @@ defmodule Discuss.Topics do
   @doc """
   Deletes a Topic.
 
+  Raises `Ecto.NoResultsError` if the Topic does not exist.
+
   ## Examples
 
-      iex> delete_topic(topic)
+      iex> delete_topic!(topic)
       {:ok, %Topic{}}
 
-      iex> delete_topic(topic)
-      {:error, %Ecto.Changeset{}}
+      iex> delete_topic!(topic)
+      ** (Ecto.NoResultsError)
 
   """
-  def delete_topic(%Topic{} = topic) do
-    Repo.delete(topic)
+  def delete_topic!(%Topic{} = topic) do
+    Repo.delete!(topic)
   end
 
   @doc """

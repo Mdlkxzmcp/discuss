@@ -14,7 +14,7 @@ defmodule Discuss.Web.TopicControllerTest do
 
   test "lists all entries on index", %{conn: conn} do
     conn = get conn, topic_path(conn, :index)
-    assert html_response(conn, 200) =~ "Listing Topics"
+    assert html_response(conn, 200) =~ "Topics"
   end
 
   test "renders form for new topics", %{conn: conn} do
@@ -29,7 +29,7 @@ defmodule Discuss.Web.TopicControllerTest do
     assert redirected_to(conn) == topic_path(conn, :show, id)
 
     conn = get conn, topic_path(conn, :show, id)
-    assert html_response(conn, 200) =~ "Show Topic"
+    assert html_response(conn, 200) =~ "Topic"
   end
 
   test "does not create topic and renders errors when data is invalid", %{conn: conn} do

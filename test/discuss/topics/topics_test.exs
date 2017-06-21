@@ -51,9 +51,9 @@ defmodule Discuss.TopicsTest do
       assert topic == Topics.get_topic!(topic.id)
     end
 
-    test "delete_topic/1 deletes the topic" do
+    test "delete_topic!/1 deletes the topic" do
       topic = topic_fixture()
-      assert {:ok, %Topic{}} = Topics.delete_topic(topic)
+      assert %Topic{} = Topics.delete_topic!(topic)
       assert_raise Ecto.NoResultsError, fn -> Topics.get_topic!(topic.id) end
     end
 

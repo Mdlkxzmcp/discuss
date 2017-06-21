@@ -17,7 +17,7 @@ defmodule Discuss.Web.TopicController do
     case Topics.create_topic(topic_params) do
       {:ok, topic} ->
         conn
-        |> put_flash(:info, "Topic created successfully.")
+        |> put_flash(:info, "Topic Created")
         |> redirect(to: topic_path(conn, :show, topic))
       {:error, %Ecto.Changeset{} = changeset} ->
         render(conn, "new.html", changeset: changeset)
@@ -41,7 +41,7 @@ defmodule Discuss.Web.TopicController do
     case Topics.update_topic(topic, topic_params) do
       {:ok, topic} ->
         conn
-        |> put_flash(:info, "Topic updated successfully.")
+        |> put_flash(:info, "Topic Updated")
         |> redirect(to: topic_path(conn, :show, topic))
       {:error, %Ecto.Changeset{} = changeset} ->
         render(conn, "edit.html", topic: topic, changeset: changeset)
@@ -49,11 +49,10 @@ defmodule Discuss.Web.TopicController do
   end
 
   def delete(conn, %{"id" => id}) do
-    topic = Topics.get_topic!(id)
-    {:ok, _topic} = Topics.delete_topic(topic)
+    Topics.get_topic!(id) |> Topics.delete_topic!
 
     conn
-    |> put_flash(:info, "Topic deleted successfully.")
+    |> put_flash(:info, "Topic Deleted")
     |> redirect(to: topic_path(conn, :index))
   end
 end
