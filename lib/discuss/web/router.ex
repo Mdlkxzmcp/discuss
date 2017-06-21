@@ -7,6 +7,7 @@ defmodule Discuss.Web.Router do
     plug :fetch_flash
     plug :protect_from_forgery
     plug :put_secure_browser_headers
+    plug Discuss.Web.Plugs.SetUser
   end
 
   pipeline :api do
@@ -20,9 +21,10 @@ defmodule Discuss.Web.Router do
     resources "/topics", TopicController, except: [:index]
   end
 
-  scope "/auth", Discuss do
+  scope "/auth", Discuss.Web do
     pipe_through :browser
 
+    get "/signout", AuthController, :sign_out
     get "/:provider", AuthController, :request
     get "/:provider/callback", AuthController, :callback
   end

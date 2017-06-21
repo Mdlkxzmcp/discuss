@@ -1,4 +1,4 @@
-defmodule Discuss.AuthController do
+defmodule Discuss.Web.AuthController do
   @moduledoc """
   Auth controller responsible for handling Ueberauth responses
   """
@@ -22,8 +22,14 @@ defmodule Discuss.AuthController do
 
   end
 
+  def sign_out(conn, _params) do
+    conn
+    |> configure_session(drop: true) # not put_session(:user_id, nil) for security reasons!
+    |> redirect(to: topic_path(conn, :index))
+  end
+
   defp sign_in(conn, params) do
-    case insert_or_update_user(params) do
+    case Accounts.insert_or_update_user(params) do
       {:ok, user} ->
         conn
         |> put_flash(:info, "Welcome back!")
@@ -36,12 +42,4 @@ defmodule Discuss.AuthController do
     end
   end
 
-  defp insert_or_update_user(params) do
-    case Accounts.get_user_by_email(params) do
-      nil ->
-        Accounts.create_user(params)
-      user ->
-        {:ok, user}
-    end
-  end
 end

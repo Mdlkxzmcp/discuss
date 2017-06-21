@@ -24,6 +24,22 @@ defmodule Discuss.Accounts do
   @doc """
   Gets a single user.
 
+  ## Examples
+
+      iex> get_user(123)
+      %User{}
+
+      iex> get_user(456)
+      nil
+
+  """
+  def get_user(id) do
+    Repo.get(User, id)
+  end
+
+  @doc """
+  Gets a single user.
+
   Raises `Ecto.NoResultsError` if the User does not exist.
 
   ## Examples
@@ -37,6 +53,27 @@ defmodule Discuss.Accounts do
   """
   def get_user!(id) do
     Repo.get!(User, id)
+  end
+
+  @doc """
+  Either creates or gets a user with the use of provided email.
+
+  ## Examples
+
+      iex> insert_or_update_user(%{value})
+      {:ok, %User{}}
+
+      iex> insert_or_update_user(%{bad_value})
+      {:error, reason}
+
+  """
+  def insert_or_update_user(params) do
+    case get_user_by_email(params) do
+      nil ->
+        create_user(params)
+      user ->
+        {:ok, user}
+    end
   end
 
   @doc """
