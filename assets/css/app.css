@@ -4,65 +4,65 @@
 }
 
 .alert {
-  padding: 15px;
   margin-bottom: 20px;
+  padding: 15px;
   border: 1px solid transparent;
   border-radius: 4px;
 }
 
 .alert-danger {
-  color: #a94442;
-  background-color: #f2dede;
   border-color: #ebccd1;
+  background-color: #f2dede;
+  color: #a94442;
 }
 
 .alert-info {
-  color: #31708f;
-  background-color: #d9edf7;
   border-color: #bce8f1;
+  background-color: #d9edf7;
+  color: #31708f;
 }
 
 nav .brand-logo {
-  position: absolute;
-  color: #fff;
   display: inline-block;
-  font-size: 2.1rem;
+  position: absolute;
   padding: 0;
+  color: #fff;
+  font-size: 2.1rem;
   white-space: nowrap;
 }
 
 
 .btn {
   margin-bottom: 0;
+  background-image: none;
   font-size: 14px;
   font-weight: 400;
   white-space: nowrap;
   touch-action: manipulation;
   user-select: none;
-  background-image: none;
 }
 
 .btn, .btn-large {
-  text-decoration: none;
-  color: #fff;
   background-color: #26a69a;
-  text-align: center;
+  color: #fff;
   letter-spacing: .5px;
-  transition: .2s ease-out;
+  text-align: center;
+  text-decoration: none;
   cursor: pointer;
+  transition: .2s ease-out;
 }
 
 .btn, .btn-large, .btn-flat {
-  border: none;
-  border-radius: 2px;
+  -webkit-tap-highlight-color: transparent;
   display: inline-block;
   height: 36px;
-  line-height: 36px;
-  outline: 0;
   padding: 0 2rem;
+  border: none;
+  border-radius: 2px;
+  outline: 0;
+  line-height: 36px;
   text-transform: uppercase;
   vertical-align: middle;
-  -webkit-tap-highlight-color: transparent;
 }
 
 .btn-danger {
@@ -74,9 +74,9 @@ nav .brand-logo {
 }
 
 .btn.active, .btn:active {
-  background-image: none;
-  outline: 0;
   -webkit-box-shadow: inset 0 3px 5px rgba(0,0,0,.125);
+  outline: 0;
+  background-image: none;
   box-shadow: inset 0 3px 5px rgba(0,0,0,.125);
 }
 

@@ -71,6 +71,7 @@ defmodule Discuss.Accounts do
     case get_user_by_email(params) do
       nil ->
         create_user(params)
+
       user ->
         {:ok, user}
     end
@@ -156,5 +157,4 @@ defmodule Discuss.Accounts do
   def change_user(%User{} = user) do
     User.changeset(user, %{})
   end
-
 end

@@ -17,7 +17,25 @@ defmodule Discuss.Topics do
       [%Topic{}, ...]
 
   """
-  def list_topics, do: Repo.all(Topic)
+  def list_topics do
+    Repo.all(Topic)
+  end
+
+  @doc """
+  Gets a singe topic.
+
+  ## Examples
+
+      iex> get_topic(123)
+      %Topic{}
+
+      iex> get_topic(456)
+      nil
+
+  """
+  def get_topic(id) do
+    Repo.get(Topic, id)
+  end
 
   @doc """
   Gets a single topic.
@@ -33,7 +51,9 @@ defmodule Discuss.Topics do
       ** (Ecto.NoResultsError)
 
   """
-  def get_topic!(id), do: Repo.get!(Topic, id)
+  def get_topic!(id) do
+    Repo.get!(Topic, id)
+  end
 
   @doc """
   Creates a topic.
@@ -49,6 +69,24 @@ defmodule Discuss.Topics do
   """
   def create_topic(attrs \\ %{}) do
     %Topic{}
+    |> Topic.changeset(attrs)
+    |> Repo.insert()
+  end
+
+  @doc """
+  Creates a topic.
+
+  ## Examples
+
+      iex> create_topic(topic, %{field: value})
+      {:ok, %Topic{}}
+
+      iex> create_topic(topic, %{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def create_topic(%Topic{} = topic, attrs) do
+    topic
     |> Topic.changeset(attrs)
     |> Repo.insert()
   end
@@ -101,4 +139,6 @@ defmodule Discuss.Topics do
   def change_topic(%Topic{} = topic) do
     Topic.changeset(topic, %{})
   end
+
+  alias Discuss.Topics.Comment
 end

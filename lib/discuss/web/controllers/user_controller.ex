@@ -12,5 +12,4 @@ defmodule Discuss.Web.UserController do
     user = Accounts.get_user!(id)
     render(conn, "show.html", user: user)
   end
-
 end

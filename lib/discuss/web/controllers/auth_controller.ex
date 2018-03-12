@@ -4,7 +4,7 @@ defmodule Discuss.Web.AuthController do
   """
 
   use Discuss.Web, :controller
-  plug Ueberauth
+  plug(Ueberauth)
 
   alias Ueberauth.Strategy.Helpers
   alias Discuss.Accounts
@@ -14,17 +14,20 @@ defmodule Discuss.Web.AuthController do
   end
 
   def callback(%{assigns: %{ueberauth_auth: auth}} = conn, params) do
-    user_params = %{ provider: Map.get(params, "provider"),
-      token: auth.credentials.token, email: auth.info.email,
-      username: auth.info.nickname, location: auth.info.location }
+    user_params = %{
+      provider: Map.get(params, "provider"),
+      token: auth.credentials.token,
+      email: auth.info.email,
+      username: auth.info.nickname,
+      location: auth.info.location
+    }
 
     sign_in(conn, user_params)
-
   end
 
   def sign_out(conn, _params) do
     conn
-    |> configure_session(drop: true) # not put_session(:user_id, nil) for security reasons!
+    |> configure_session(drop: true)
     |> redirect(to: topic_path(conn, :index))
   end
 
@@ -35,11 +38,11 @@ defmodule Discuss.Web.AuthController do
         |> put_flash(:info, "Welcome back!")
         |> put_session(:user_id, user.id)
         |> redirect(to: topic_path(conn, :index))
+
       {:error, _reason} ->
         conn
         |> put_flash(:error, "Error when signing in :C")
         |> redirect(to: topic_path(conn, :index))
     end
   end
-
 end

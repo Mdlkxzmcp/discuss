@@ -1,7 +1,5 @@
 defmodule Discuss.AccountsTest do
   use Discuss.DataCase
 
-  alias Discuss.Accounts
-
-
+  #  alias Discuss.Accounts
 end

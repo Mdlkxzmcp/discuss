@@ -6,7 +6,7 @@ defmodule Discuss.Application do
 
     children = [
       supervisor(Discuss.Repo, []),
-      supervisor(Discuss.Web.Endpoint, []),
+      supervisor(Discuss.Web.Endpoint, [])
     ]
 
     opts = [strategy: :one_for_one, name: Discuss.Supervisor]
