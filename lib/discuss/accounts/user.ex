@@ -4,6 +4,8 @@ defmodule Discuss.Accounts.User do
   alias Discuss.Accounts.User
   alias Discuss.Topics
 
+  @derive {Poison.Encoder, only: [:email]}
+
   schema "accounts_users" do
     field(:email, :string)
     field(:username, :string)

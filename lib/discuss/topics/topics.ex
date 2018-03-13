@@ -141,4 +141,40 @@ defmodule Discuss.Topics do
   end
 
   alias Discuss.Topics.Comment
+
+  @doc """
+  Creates a comment by a user under a topic.
+
+  ## Examples
+
+      iex> create_comment(topic, %{field: value})
+      {:ok, %Comment{}}
+
+      iex> create_comment(topic, %{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def create_comment(%Topic{} = topic, user_id, attrs \\ %{}) do
+    Ecto.build_assoc(topic, :comments, user_id: user_id)
+    |> Comment.changeset(attrs)
+    |> Repo.insert()
+  end
+
+  @doc """
+  Gets a single topic with all the associated comments.
+  For each comment the user is also returned.
+
+  ### Examples
+
+      iex> get_topic_with_comments(123)
+      %Topic{comments: [%Comment{}, %Comment{}]}
+
+      iex> get_topic_with_comments(456)
+      nil
+
+  """
+  def get_topic_with_comments(id) do
+    get_topic(id)
+    |> Repo.preload(comments: [:user])
+  end
 end

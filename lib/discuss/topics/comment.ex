@@ -4,6 +4,8 @@ defmodule Discuss.Topics.Comment do
   alias Discuss.Topics.Comment
   alias Discuss.{Accounts, Topics}
 
+  @derive {Poison.Encoder, only: [:content, :user]}
+
   schema "topics_comments" do
     field(:content, :string)
     belongs_to(:user, Accounts.User)
